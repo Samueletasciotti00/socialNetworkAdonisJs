@@ -22,9 +22,48 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
+  @column()
+  declare firstName: string
+
+  @column()
+  declare lastName: string
+
+  @column()
+  declare dateOfBirth: DateTime
+
+  @column()
+  declare gender: 'male' | 'female' | 'other'
+
+  @column()
+  declare location: string
+
+  @column()
+  declare profileImgUrl: string
+
+  @column()
+  declare coverImgUrl: string
+
+  @column()
+  declare bio: string
+
+  @column()
+  declare profileVisibility: 'public' | 'private' | 'friends'
+
+  @column()
+  declare post: number
+
+  @column()
+  declare like: number
+
+  @column()
+  declare theme: string
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @column()
+  declare deletedAt: DateTime | null
 }
