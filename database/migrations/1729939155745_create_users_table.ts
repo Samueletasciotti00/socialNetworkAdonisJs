@@ -20,8 +20,8 @@ export default class extends BaseSchema {
       table.string('location')
 
       // Profile User
-      table.string('profile_img_url') // Inserire un img di default
-      table.string('cover_image_url') // Inserire un img di default
+      table.string('profile_img_url') // Insert a default image
+      table.string('cover_image_url') // Insert a default image
       table.string('bio')
       table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
       table.integer('post').defaultTo(0)

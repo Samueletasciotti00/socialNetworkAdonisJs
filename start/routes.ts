@@ -9,17 +9,13 @@
 
 import router from '@adonisjs/core/services/router'
 
-// Salvo in una const lo UserController;
+// Save the UserController in a const
 const UsersController = () => import('#controllers/users_controller')
 
-router.get('/', async () => {
-  return 'Home Page Basic'
-})
+// Iznsert the routes for the UserController
 
-// Inserirco le rottw per lo UserController
-
-router.get('users', [UsersController, 'index']) // Mostra tutti i dati
-router.get('users/:id', [UsersController, 'show']) // Mostra i dati specifici
-router.post('users', [UsersController, 'store']) // Aggiunge i dati nel db 
-router.patch('user/:id',[UsersController, 'update']) // Aggiorna un dato specifico
-router.delete('user/:id',[UsersController, 'destroy']) // Elimina il dato indicato
+router.get('users', [UsersController, 'index']) // Show all data
+router.get('users/:id', [UsersController, 'show']) // Show specific user detail
+router.post('users', [UsersController, 'store']) // Update Database 
+router.patch('user/:id',[UsersController, 'update']) // Update single data
+router.delete('user/:id',[UsersController, 'destroy']) // Delete data
