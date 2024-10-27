@@ -12,6 +12,10 @@ import router from '@adonisjs/core/services/router'
 // Save the UserController in a const
 const UsersController = () => import('#controllers/users_controller')
 
+// router.get('/', async () => {
+//   return 'Home Page Basic'
+// })
+
 // Iznsert the routes for the UserController
 
 router.get('users', [UsersController, 'index']) // Show all data
