@@ -2,3 +2,81 @@
 
 - Sistemare il seeder per la creazione di dati 
 - Sistemare il controller 
+
+// async store 1
+
+// Save in a variable the new User
+      // const user = new User()
+
+      // Save all data for create new user
+      // user.user = request.input('user')
+      // user.email = request.input('email')
+      // user.password = request.input('password')
+      // const user = await User.create({
+      //   user: '',
+      //   email: '',
+      //   password: '',
+      //   gender: 'other',
+      //   location: '',
+      //   bio: 'Questa è la bio di un utende prova',
+      //   theme: 'dark',
+      //   firstName: 'utente',
+      //   lastName: 'prova',
+      //   dateOfBirth: DateTime.local(1995, 5, 15),
+      //   profileImgUrl: 'xxx',
+      //   coverImgUrl: 'xxx',
+      //   profileVisibility: 'private',
+        
+      // })
+
+      // Save data
+      // await user.save()
+
+
+// async store 2
+
+
+      // All data for new User
+      const userData = request.only([
+        'user',
+        'email',
+        'password',
+        'firstName',
+        'lastName',
+        'dateOfBirth',
+        'gender',
+        'location',
+        'profileImgUrl',
+        'coverImgUrl',
+        'bio',
+        'profileVisibility',
+        'post',
+        'like',
+        'theme',
+      ])
+
+      // Create new User
+      const user = await User.create(userData)
+
+
+// 
+const user = await User.create({
+        user: 'virk',
+        email: 'virk@adonisjs.com',
+        password: 'test',
+        firstName: 'Luca',
+        lastName: 'Rossi',
+        dateOfBirth: DateTime.fromISO('1990-01-01'),
+        gender: 'male',
+        location: 'Rome',
+        profileImgUrl: 'https://example.com/profile.jpg',
+        coverImgUrl: 'https://example.com/profile.jpg',
+        bio: 'Web Developer',
+        profileVisibility: 'public',
+        post: 10,
+        like: 5,
+        theme: 'dark'
+
+      })
+      
+      console.log(user.$isPersisted) // true
