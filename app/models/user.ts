@@ -56,7 +56,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare like: number
 
   @column()
-  declare theme: string
+  declare theme: 'light' | 'dark'
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
