@@ -1,11 +1,13 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '../models/user.js'
+// import { DateTime } from 'luxon'
 
 export default class UsersController {
   /**
    * Display a list of resource
    */
-  async index({ response }: HttpContext) { // Si passano i parametri di richiest e risposta
+  async index({ response }: HttpContext) {
+    // Si passano i parametri di richiest e risposta
     try {
       // Save all database users in a variable
       const users = await User.all()
@@ -25,22 +27,36 @@ export default class UsersController {
    */
   async store({ request, response }: HttpContext) {
     try {
-      
-      // Save in a variable the new User
-      const user = new User()
 
-      // Save all data for create new user
-      user.user = request.input('user')
-      user.email = request.input('email')
-      user.password = request.input('password')
+      // Request all data params for new User
+      const data = request.only([
+        'user',
+        'email',
+        'password',
+        'firstName',
+        'lastName',
+        'dateOfBirth',
+        'gender',
+        'location',
+        'profileImgUrl',
+        'coverImgUrl',
+        'bio',
+        'profileVisibility',
+        'post',
+        'like',
+        'theme',
+      ])
 
-      // Save data
-      await user.save();
+      // Create new User
+      const user = await User.create(data)
 
       // Return for the response
-      return response.status(201).json({ data: user, message: 'Utente creato correttamente'})
+      return response.status(201).json({ data: user, message: 'User created successfully' })
+
     } catch (error) {
-      return response.status(400).json({ error: 'Failed store' })
+      
+      // Error state
+      return response.status(400).json({ error: 'Failed to create a new User' })
     }
   }
 
@@ -48,32 +64,25 @@ export default class UsersController {
    * Show individual record
    */
   async show({ params }: HttpContext) {
-
     // Show an User details
     return await User.findOrFail(params.id)
   }
 
   /**
-   * Edit individual record
-   */
-  // async edit({ params }: HttpContext) {}
-
-  /**
    * Handle form submission for the edit action
    */
   async update({ params, request }: HttpContext) {
-
     // Declare the User to be edited in a variable
     const user = await User.findOrFail(params.id)
 
     user.user = request.input('user') // Callback userName
     user.email = request.input('email') // Callback email
     user.password = request.input('password') // Callback password
-    
+
     // Save data
     await user.save()
 
-    // Return response 
+    // Return response
     return user
   }
 
@@ -81,7 +90,6 @@ export default class UsersController {
    * Delete record
    */
   async destroy({ params }: HttpContext) {
-
     // Declare the data to be deleted in a variable
     const user = await User.findByOrFail(params.id)
 
