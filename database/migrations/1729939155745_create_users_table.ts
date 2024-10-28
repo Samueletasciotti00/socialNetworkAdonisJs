@@ -8,15 +8,15 @@ export default class extends BaseSchema {
       table.increments('id').notNullable()
       
       // Login Data
-      table.string('user',80).nullable().unique()
-      table.string('email', 254).notNullable().unique()
-      table.string('password').notNullable()
+      table.string('user',21).notNullable().unique()
+      table.string('email', 35).notNullable().unique()
+      table.string('password', 21).notNullable()
 
       // Info 
-      table.string('first_name')
-      table.string('last_name')
-      table.date('date_of_birth')
-      table.enum('gender',['male', 'female', 'other'])
+      table.string('first_name').notNullable()
+      table.string('last_name').notNullable()
+      table.date('date_of_birth').notNullable()
+      table.enum('gender',['male', 'female', 'other']).notNullable()
       table.string('location')
 
       // Profile User
@@ -28,11 +28,11 @@ export default class extends BaseSchema {
       table.integer('like').defaultTo(0)
 
       // Detail of profile user
-      table.string('theme').defaultTo('light')
+      table.string('theme').defaultTo('light').notNullable()
 
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
-      table.timestamp('deleted_at').nullable()
+      table.timestamp('updated_at')
+      table.timestamp('deleted_at')
     })
   }
 
