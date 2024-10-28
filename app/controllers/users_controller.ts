@@ -52,6 +52,7 @@ export default class UsersController {
 
   async update({ params, request, response }: HttpContext) {
     try {
+
       // Request all data params for update specific User
       const data = request.only([
         'user',
@@ -73,8 +74,7 @@ export default class UsersController {
 
       // Declare the User to be edited in a variable
       const user = await User.findOrFail(params.id)
-
-      user.merge(data)
+      user.merge(data) // Merge all data in user
 
       await user.save()
 
@@ -85,19 +85,13 @@ export default class UsersController {
     }
   }
 
-  /**
-   * Delete record
-   */
   async destroy({ params, response }: HttpContext) {
-    try {
+   
       // Declare the data to be deleted in a variable
-      const user = await User.findByOrFail(params.id)
+      const user = await User.findOrFail(params.id)
 
       // Delete data
       await user.delete()
-      return response.status(200).json({ message: 'User deleted successfully' })
-    } catch {
-      return response.status(404).json({ message: 'User not found' })
-    }
+      return response.json({ user })
   }
 }
