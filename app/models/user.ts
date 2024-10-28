@@ -10,6 +10,9 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
+  static save(data: { user: string; email: string; password: string; firstName: string; lastName: string; dateOfBirth: DateTime; gender: string; location: string; profileImgUrl: string; coverImgUrl: string; bio: string; profileVisibility: string; post: number; like: number; theme: string }) {
+    throw new Error('Method not implemented.')
+  }
   @column({ isPrimary: true })
   declare id: number
 
