@@ -1,12 +1,4 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
+// IMPORTS
 import router from '@adonisjs/core/services/router'
 
 // Save the UserController in a const
