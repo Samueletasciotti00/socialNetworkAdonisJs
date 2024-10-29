@@ -1,82 +1,101 @@
-// TO DO
+// Base of migration file
 
-- Sistemare il seeder per la creazione di dati 
-- Sistemare il controller 
+import { BaseSchema } from '@adonisjs/lucid/schema'
 
-// async store 1
+export default class extends BaseSchema {
+  protected tableName = 'users'
 
-// Save in a variable the new User
-      // const user = new User()
-
-      // Save all data for create new user
-      // user.user = request.input('user')
-      // user.email = request.input('email')
-      // user.password = request.input('password')
-      // const user = await User.create({
-      //   user: '',
-      //   email: '',
-      //   password: '',
-      //   gender: 'other',
-      //   location: '',
-      //   bio: 'Questa è la bio di un utende prova',
-      //   theme: 'dark',
-      //   firstName: 'utente',
-      //   lastName: 'prova',
-      //   dateOfBirth: DateTime.local(1995, 5, 15),
-      //   profileImgUrl: 'xxx',
-      //   coverImgUrl: 'xxx',
-      //   profileVisibility: 'private',
-        
-      // })
-
-      // Save data
-      // await user.save()
-
-
-// async store 2
-
-
-      // All data for new User
-      const userData = request.only([
-        'user',
-        'email',
-        'password',
-        'firstName',
-        'lastName',
-        'dateOfBirth',
-        'gender',
-        'location',
-        'profileImgUrl',
-        'coverImgUrl',
-        'bio',
-        'profileVisibility',
-        'post',
-        'like',
-        'theme',
-      ])
-
-      // Create new User
-      const user = await User.create(userData)
-
-
-// 
-const user = await User.create({
-        user: 'virk',
-        email: 'virk@adonisjs.com',
-        password: 'test',
-        firstName: 'Luca',
-        lastName: 'Rossi',
-        dateOfBirth: DateTime.fromISO('1990-01-01'),
-        gender: 'male',
-        location: 'Rome',
-        profileImgUrl: 'https://example.com/profile.jpg',
-        coverImgUrl: 'https://example.com/profile.jpg',
-        bio: 'Web Developer',
-        profileVisibility: 'public',
-        post: 10,
-        like: 5,
-        theme: 'dark'
-
-      })
+  async up() {
+    this.schema.createTable(this.tableName, (table) => {
+      table.increments('id').notNullable()
       
-      console.log(user.$isPersisted) // true
+      // Login Data
+      table.string('user',80).nullable().unique()
+      table.string('email', 254).notNullable().unique()
+      table.string('password').notNullable()
+
+      // Info 
+      table.string('first_name')
+      table.string('last_name')
+      table.date('date_of_birth')
+      table.enum('gender',['male', 'female', 'other'])
+      table.string('location')
+
+      // Profile User
+      table.string('profile_img_url') // Insert a default image
+      table.string('cover_image_url') // Insert a default image
+      table.string('bio')
+      table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
+      table.integer('post').defaultTo(0)
+      table.integer('like').defaultTo(0)
+
+      // Detail of profile user
+      table.string('theme').defaultTo('light')
+
+      table.timestamp('created_at').notNullable()
+      table.timestamp('updated_at').nullable()
+      table.timestamp('deleted_at').nullable()
+    })
+  }
+
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
+}
+
+
+// Migliorare le validazioni, controllare la create_user_table
+
+// Table_user 
+ async up() {
+    this.schema.createTable(this.tableName, (table) => {
+      table.increments('id').notNullable()
+      
+      // Login Data
+      table.string('user',80).notNullable().unique()
+      table.string('email', 254).notNullable().unique()
+      table.string('password').notNullable()
+
+      // Info 
+      table.string('first_name').notNullable()
+      table.string('last_name').notNullable()
+      table.date('date_of_birth').notNullable()
+      table.enum('gender',['male', 'female', 'other']).notNullable()
+      table.string('location').nullable()
+
+      // Profile User
+      table.string('profile_img_url').nullable() // Insert a default image
+      table.string('cover_image_url').nullable() // Insert a default image
+      table.string('bio').nullable()
+      table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
+      table.integer('post').nullable().defaultTo(0)
+      table.integer('like').nullable().defaultTo(0)
+
+      // Detail of profile user
+      table.string('theme').defaultTo('light').notNullable()
+
+      table.timestamp('created_at').notNullable()
+      table.timestamp('updated_at').nullable()
+      table.timestamp('deleted_at').nullable()
+    })
+  }
+
+  // JSON debug
+  {
+      "user": "utente1",
+      "email": "utente@uno.com",
+      "firstName": "Utente",
+      "lastName": "Uno",
+      "dateOfBirth": "1999-01-01",
+      "gender": "male",
+      "location": "Roma",
+      "profileImgUrl": "",
+      "bio": "Tester",
+      "profileVisibility": "public",
+      "theme": "dark",
+      "post": 0,
+      "like": 0,
+      "createdAt": "2024-10-28T10:21:24.000+00:00",
+      "updatedAt": "2024-10-28T10:21:24.000+00:00",
+      "deletedAt": "2024-10-28T10:21:24.000+00:00"
+    }
