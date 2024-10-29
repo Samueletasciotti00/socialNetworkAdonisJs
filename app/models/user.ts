@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
+import Avatar from './avatar.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -10,6 +12,13 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
+  @hasOne(()=> Avatar,{
+    foreignKey: 'userId',
+    localKey: 'id'
+  })
+
+  declare avatar: HasOne<typeof Avatar>
+
   static save(data: { user: string; email: string; password: string; firstName: string; lastName: string; dateOfBirth: DateTime; gender: string; location: string; profileImgUrl: string; coverImgUrl: string; bio: string; profileVisibility: string; post: number; like: number; theme: string }) {
     throw new Error('Method not implemented.')
   }

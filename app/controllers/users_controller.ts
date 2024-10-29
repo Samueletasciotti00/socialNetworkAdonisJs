@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '../models/user.js'
+import Avatar from '../models/avatar.js'
 
 export default class UsersController {
   // Show all data from User()
@@ -37,12 +38,12 @@ export default class UsersController {
 
       console.log(data);
       
-
       // Create new User
       const user = await User.create(data)
+      const avatar = await Avatar.create({ userId: user.id }) // Create an Avatar automaticaly when create a new User
 
       // Return for the response
-      return response.status(201).json({ data: user, message: 'User created successfully' })
+      return response.status(201).json({ data: [user , avatar], message: 'User created successfully' })
     } catch (error) {
       console.log(error);
       return response.status(400).json({ error: 'Failed to create a new User', details: error.message })
