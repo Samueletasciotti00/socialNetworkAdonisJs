@@ -20,19 +20,23 @@ export default class UsersController {
         'user',
         'email',
         'password',
-        'firstName',
-        'lastName',
-        'dateOfBirth',
+        'first_name',
+        'last_name',
+        'date_of_birth',
         'gender',
         'location',
-        'profileImgUrl',
-        'coverImgUrl',
+        'profile_img_url',
+        'cover_img_url',
         'bio',
-        'profileVisibility',
+        'profile_visibility',
         'post',
         'like',
         'theme',
+        'created_at'
       ])
+
+      console.log(data);
+      
 
       // Create new User
       const user = await User.create(data)
@@ -40,19 +44,18 @@ export default class UsersController {
       // Return for the response
       return response.status(201).json({ data: user, message: 'User created successfully' })
     } catch (error) {
-      return response.status(400).json({ error: 'Failed to create a new User' })
+      console.log(error);
+      return response.status(400).json({ error: 'Failed to create a new User', details: error.message })
     }
   }
 
   async show({ params }: HttpContext) {
     // Show an User details
     return await User.findOrFail(params.id)
-    console.log(1)
   }
 
   async update({ params, request, response }: HttpContext) {
     try {
-
       // Request all data params for update specific User
       const data = request.only([
         'user',
@@ -86,12 +89,11 @@ export default class UsersController {
   }
 
   async destroy({ params, response }: HttpContext) {
-   
-      // Declare the data to be deleted in a variable
-      const user = await User.findOrFail(params.id)
+    // Declare the data to be deleted in a variable
+    const user = await User.findOrFail(params.id)
 
-      // Delete data
-      await user.delete()
-      return response.json({ user })
+    // Delete data
+    await user.delete()
+    return response.json({ user })
   }
 }

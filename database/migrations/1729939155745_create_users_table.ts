@@ -8,9 +8,9 @@ export default class extends BaseSchema {
       table.increments('id').notNullable()
       
       // Login Data
-      table.string('user',21).notNullable().unique()
-      table.string('email', 35).notNullable().unique()
-      table.string('password', 21).notNullable()
+      table.string('user',15).notNullable().unique()
+      table.string('email', 20).notNullable().unique()
+      table.string('password', 255).notNullable()
 
       // Info 
       table.string('first_name').notNullable()
@@ -21,7 +21,7 @@ export default class extends BaseSchema {
 
       // Profile User
       table.string('profile_img_url') // Insert a default image
-      table.string('cover_image_url') // Insert a default image
+      table.string('cover_img_url').nullable() // Insert a default image
       table.string('bio')
       table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
       table.integer('post').defaultTo(0)
