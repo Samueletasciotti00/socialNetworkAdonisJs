@@ -35,8 +35,6 @@ export default class UsersController {
         'theme',
         'created_at'
       ])
-
-      console.log(data);
       
       // Create new User
       const user = await User.create(data)

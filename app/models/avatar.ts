@@ -12,7 +12,7 @@ export default class Avatar extends BaseModel {
   declare color: string
 
   @column()
-  declare imgAvatar: string
+  declare imgAvatar: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
