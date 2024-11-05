@@ -6,11 +6,12 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-
-      // ForeignKey for User relation
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
-      table.string('color').defaultTo('black')
+
+      table.enum('theme',['light', 'dark']).defaultTo('light').notNullable()
       table.string('img_avatar').defaultTo('img')
+      table.string('cover_img').defaultTo('img_cover').nullable()
+      
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
