@@ -99,3 +99,22 @@ export default class extends BaseSchema {
       "updatedAt": "2024-10-28T10:21:24.000+00:00",
       "deletedAt": "2024-10-28T10:21:24.000+00:00"
     }
+
+
+
+    {
+  "user": "Samuele",
+  "email": "samu@icloud.it",
+  "password": "nuovaPassword",
+  "first_name": "Samuele",
+  "last_name": "Tasciotti",
+  "date_of_birth": "2000-09-02",
+  "gender": "male",
+  "location": "Priverno, Italy",
+  "profile_img_url": "https://example.com/images/default-profile.jpg",
+  "cover_img_url": "https://example.com/images/default-profile.jpg",
+  "bio": "Passionate about technology and coding.",
+  "post": 0,
+  "like": 0,
+  "theme": "light"
+}
