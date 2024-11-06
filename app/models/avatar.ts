@@ -9,10 +9,16 @@ export default class Avatar extends BaseModel {
   declare userId: number
 
   @column()
-  declare color: string
+  declare theme: 'light' | 'dark'
 
   @column()
-  declare imgAvatar: string | null
+  declare imgAvatar: File
+
+  @column()
+  declare coverImg: string
+
+  @column()
+  declare profileVisibility: 'public' | 'private' | 'friends'
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
