@@ -1,18 +1,16 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'avatars'
+  protected tableName = 'posts'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
 
-      table.enum('theme',['light', 'dark']).defaultTo('light').notNullable()
-      table.string('img_avatar').defaultTo('img')
-      table.string('cover_img').defaultTo('img_cover').nullable()
-      table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
-      
+      table.string('title', 255).notNullable()
+      table.text('content').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

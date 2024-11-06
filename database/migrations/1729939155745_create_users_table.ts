@@ -18,7 +18,6 @@ export default class extends BaseSchema {
       table.date('date_of_birth').notNullable()
       table.enum('gender',['male', 'female', 'other']).notNullable()
       table.string('residence')
-      table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at')
