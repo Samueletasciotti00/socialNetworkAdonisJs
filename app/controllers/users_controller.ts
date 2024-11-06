@@ -16,7 +16,7 @@ export default class UsersController {
     try {
       // Request all data params for new User
       const data = request.only([
-        'user',
+        'user_name',
         'email',
         'password',
         'first_name',
@@ -28,7 +28,7 @@ export default class UsersController {
         'created_at',
       ])
       const user = await User.create(data)
-      const avatar = await Avatar.create({ userId: user.id }) // Create an Avatar automaticaly when create a new User
+      const avatar = await Avatar.create({ userId: user.id }) // Create an Avatar automaticaly when create a new User by id
 
       return response
         .status(201)
@@ -49,7 +49,7 @@ export default class UsersController {
     try {
       // Request all data params for update specific User
       const data = request.only([
-        'user',
+        'user_name',
         'email',
         'password',
         'first_name',
@@ -57,7 +57,6 @@ export default class UsersController {
         'date_of_birth',
         'gender',
         'residence',
-        'profile_visibility',
         'created_at',
       ])
       const user = await User.findOrFail(params.id)
