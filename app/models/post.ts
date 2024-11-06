@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Avatar extends BaseModel {
+export default class Post extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -9,16 +9,10 @@ export default class Avatar extends BaseModel {
   declare userId: number
 
   @column()
-  declare theme: 'light' | 'dark'
+  declare title: string
 
   @column()
-  declare imgAvatar: File
-
-  @column()
-  declare coverImg: string
-
-  @column()
-  declare profileVisibility: 'public' | 'private' | 'friends'
+  declare content: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

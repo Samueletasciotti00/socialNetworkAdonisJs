@@ -3,10 +3,8 @@ import User from '../models/user.js'
 import Avatar from '../models/avatar.js'
 
 export default class UsersController {
-  // Show all data from User()
   async index({ response }: HttpContext) {
     try {
-      // Save all database users in a variable
       const users = await User.all()
       return response.status(200).json({ data: users })
     } catch (error) {
@@ -18,29 +16,20 @@ export default class UsersController {
     try {
       // Request all data params for new User
       const data = request.only([
-        'user',
+        'user_name',
         'email',
         'password',
         'first_name',
         'last_name',
         'date_of_birth',
         'gender',
-        'location',
-        'profile_img_url',
-        'cover_img_url',
-        'bio',
+        'residence',
         'profile_visibility',
-        'post',
-        'like',
-        'theme',
         'created_at',
       ])
-
-      // Create new User
       const user = await User.create(data)
-      const avatar = await Avatar.create({ userId: user.id }) // Create an Avatar automaticaly when create a new User
+      const avatar = await Avatar.create({ userId: user.id }) // Create an Avatar automaticaly when create a new User by id
 
-      // Return for the response
       return response
         .status(201)
         .json({ data: [user, avatar], message: 'User created successfully' })
@@ -53,7 +42,6 @@ export default class UsersController {
   }
 
   async show({ params }: HttpContext) {
-    // Show an User details
     return await User.findOrFail(params.id)
   }
 
@@ -61,30 +49,21 @@ export default class UsersController {
     try {
       // Request all data params for update specific User
       const data = request.only([
-        'user',
+        'user_name',
         'email',
         'password',
-        'firstName',
-        'lastName',
-        'dateOfBirth',
+        'first_name',
+        'last_name',
+        'date_of_birth',
         'gender',
-        'location',
-        'profileImgUrl',
-        'coverImgUrl',
-        'bio',
-        'profileVisibility',
-        'post',
-        'like',
-        'theme',
+        'residence',
+        'created_at',
       ])
-
-      // Declare the User to be edited in a variable
       const user = await User.findOrFail(params.id)
       user.merge(data) // Merge all data in user
 
       await user.save()
 
-      // Return response
       return response.status(201).json({ data: user, message: 'User updated successfully' })
     } catch (error) {
       return response.status(400).json({ error: 'Failed to update the User' })
@@ -92,10 +71,7 @@ export default class UsersController {
   }
 
   async destroy({ params, response }: HttpContext) {
-    // Declare the data to be deleted in a variable
     const user = await User.findOrFail(params.id)
-
-    // Delete data
     await user.delete()
     return response.json({ user })
   }
