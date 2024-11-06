@@ -1,4 +1,5 @@
 import router from '@adonisjs/core/services/router'
+import UserPostsController from '../app/controllers/user_posts_controller.js'
 
 const UsersController = () => import('#controllers/users_controller')  // Users
 const UserAvatarController = () => import('#controllers/user_avatars_controller') // Avatars
@@ -9,5 +10,7 @@ router.post('users', [UsersController, 'store']) // Update Database
 router.put('users/:id/edit' ,[UsersController, 'update']) // Update single data
 router.delete('users/:id',[UsersController, 'destroy']) // Delete data
 
-// Insert the routes for the UserAvatarsController
+
 router.put('avatars/:id',[UserAvatarController, 'update']) 
+
+router.get('posts', [UserPostsController, 'index'])
