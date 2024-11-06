@@ -1,10 +1,12 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Avatar from './avatar.js'
+import Post from "./post.js"
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), { // Hash methods for crypting password
   uids: ['email'],
@@ -12,18 +14,17 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), { // Hash methods fo
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
-  @hasOne(()=> Avatar,{
-    foreignKey: 'userId',
-    localKey: 'id'
-  })
-
+  @hasOne(()=> Avatar)
   declare avatar: HasOne<typeof Avatar>
+
+  @hasMany(() => Post)
+  declare posts: HasMany<typeof Post>
 
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare user: string | null
+  declare userName: string | null
 
   @column()
   declare email: string
@@ -44,10 +45,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare gender: 'male' | 'female' | 'other'
 
   @column()
-  declare location: string
-
-  @column()
-  declare profileVisibility: 'public' | 'private' | 'friends'
+  declare residence: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
