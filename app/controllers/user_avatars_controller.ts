@@ -18,6 +18,11 @@ export default class UserAvatarsController {
         return response.status(400).json({ message: 'img error' })
       }
     }
+    async destroy({ params, response }: HttpContext) {
+      const avatar = await Avatar.findOrFail(params.id)
+      await avatar.delete()
+      return response.json({ avatar })
+    }
 
   // async update({ params, request, response }: HttpContext) {
   //   try {

@@ -1,16 +1,21 @@
 import router from '@adonisjs/core/services/router'
-import UserPostsController from '../app/controllers/user_posts_controller.js'
 
-const UsersController = () => import('#controllers/users_controller')  // Users
-const UserAvatarController = () => import('#controllers/user_avatars_controller') // Avatars
+const UsersController = () => import('#controllers/users_controller') 
+const UserAvatarController = () => import('#controllers/user_avatars_controller') 
+const UserPostsController = () => import('#controllers/user_posts_controller')
 
 router.get('users', [UsersController, 'index']) // Show all data
-router.get('users/:id', [UsersController, 'show']) // Show specific user detail
 router.post('users', [UsersController, 'store']) // Update Database 
-router.put('users/:id/edit' ,[UsersController, 'update']) // Update single data
+router.get('users/:id', [UsersController, 'show']) // Show specific user detail
+router.put('users/:id/' ,[UsersController, 'update']) // Update single data
 router.delete('users/:id',[UsersController, 'destroy']) // Delete data
 
 
 router.put('avatars/:id',[UserAvatarController, 'update']) 
+router.delete('avatars/:id',[UserAvatarController, 'destroy'])
 
 router.get('posts', [UserPostsController, 'index'])
+router.post('posts', [UserPostsController, 'store'])
+router.get('posts/:id', [UserPostsController, 'show'])
+router.patch('posts/:id', [UserPostsController, 'update'])
+router.delete('posts/:id', [UserPostsController, 'destroy'])

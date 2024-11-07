@@ -102,19 +102,13 @@ export default class extends BaseSchema {
 
 
 
-    {
-  "user": "Samuele",
-  "email": "samu@icloud.it",
-  "password": "nuovaPassword",
-  "first_name": "Samuele",
-  "last_name": "Tasciotti",
+{
+  "user_name": "Utente",
+  "email": "utente@icloud.it",
+  "password": "nuova2Password",
+  "first_name": "Utente",
+  "last_name": "Steeve",
   "date_of_birth": "2000-09-02",
   "gender": "male",
-  "location": "Priverno, Italy",
-  "profile_img_url": "https://example.com/images/default-profile.jpg",
-  "cover_img_url": "https://example.com/images/default-profile.jpg",
-  "bio": "Passionate about technology and coding.",
-  "post": 0,
-  "like": 0,
-  "theme": "light"
+  "residence": "Priverno, Italy"
 }

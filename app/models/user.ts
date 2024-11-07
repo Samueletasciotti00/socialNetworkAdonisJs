@@ -6,7 +6,8 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Avatar from './avatar.js'
-import Post from "./post.js"
+import Post from './post.js'
+import Like from './like.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), { // Hash methods for crypting password
   uids: ['email'],
@@ -14,11 +15,14 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), { // Hash methods fo
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
-  @hasOne(()=> Avatar)
+  @hasOne(()=> Avatar,)
   declare avatar: HasOne<typeof Avatar>
 
   @hasMany(() => Post)
   declare posts: HasMany<typeof Post>
+
+  @hasMany(() => Like)
+  declare likes: HasMany<typeof Like>
 
   @column({ isPrimary: true })
   declare id: number
