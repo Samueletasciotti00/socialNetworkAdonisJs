@@ -6,7 +6,7 @@ export default class LikesController {
     try{
         const userId = request.input('user_id')
         const postId = request.input('post_id')
-        // Select like if have an UserId,PostId
+        // Select first data like if have an UserId,PostId
         const existingLike = await Like.query().where('user_id', userId).andWhere('post_id', postId).first()
         if (existingLike) {
             return response.badRequest({ message: 'Like already exist' });
@@ -25,9 +25,8 @@ export default class LikesController {
         const postId = request.input('post_id')
         console.log(postId, userId);
         
-        // Select like if have an UserId,PostId
+        // Select first data like if have an UserId,PostId
         const existingLike = await Like.query().where('user_id', userId).andWhere('post_id', postId).first()
-        console.log('Existing Like:', existingLike)
         if (!existingLike) {
             return response.badRequest({ message: 'Like already removed' });
         }
