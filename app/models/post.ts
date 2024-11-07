@@ -13,7 +13,6 @@ export default class Post extends BaseModel {
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-
   @column()
   declare title: string
 

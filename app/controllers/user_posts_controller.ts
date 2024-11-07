@@ -14,8 +14,11 @@ export default class UserPostsController {
   async store({ request, response }: HttpContext) {
     try {
       const data = request.only(['title', 'content','userId'])
-      const post = await Post.create(data)
-      return response.status(201).json({data: post})
+      if(data.userId > 0) {
+        const post = await Post.create(data)
+        return response.status(201).json({data: post})
+      }
+      
     } catch (error) {
       return response.status(500).json({ error: 'Fail to create a new post'})
     }
