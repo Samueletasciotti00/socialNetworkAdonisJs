@@ -9,7 +9,9 @@ export default class extends BaseSchema {
 
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.integer('post_id').unsigned().references('id').inTable('posts').onDelete('CASCADE')
-
+      
+      // Comments of comments
+      table.integer('parent_id').unsigned().nullable().references('id').inTable('comments').onDelete('CASCADE')
       table.text('content').notNullable()
 
       table.timestamp('created_at')
