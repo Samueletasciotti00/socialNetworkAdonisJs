@@ -20,9 +20,6 @@ export default class Like extends BaseModel {
   @belongsTo(()=> Post)
   declare post: BelongsTo<typeof Post>
 
-
-
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
