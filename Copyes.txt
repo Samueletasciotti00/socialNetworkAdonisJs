@@ -11,12 +11,35 @@
   "residence": "Priverno, Italy"
 }
 
+// Like
+{
+  "user_id": 1,
+  "post_id":1
+}
+
 // Commento semplice
 
 {
   "user_id": 1,
   "post_id": 1,
   "content": "ciaone ciao"
+}
+
+// Commento del commento
+
+{
+  "user_id": 1,
+  "post_id": 1,
+  "content": "ciaone ciao",
+  "parent_id": 1
+}
+
+// Rimozione commento
+
+{
+  "user_id": 1,
+  "post_id": 1,
+  "commit_id": 1
 }
 
 // Nuovo post
