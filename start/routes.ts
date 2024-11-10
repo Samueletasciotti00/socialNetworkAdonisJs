@@ -5,6 +5,7 @@ const UserAvatarController = () => import('#controllers/user_avatars_controller'
 const UserPostsController = () => import('#controllers/user_posts_controller')
 const LikesController = () => import('#controllers/likes_controller')
 const CommentsController = () => import('#controllers/comments_controller')
+const CommentsLikesController = () => import('#controllers/comments_likes_controller')
 
 router.get('users', [UsersController, 'index']) // Show all data
 router.post('users', [UsersController, 'store']) // Update Database 
@@ -27,3 +28,6 @@ router.delete('like',[ LikesController, 'unLike'])
 
 router.post('comments', [CommentsController, 'commit'])
 router.delete('comments', [CommentsController, 'remove'])
+
+router.post('comments/like', [CommentsLikesController, 'like'])
+router.delete('comments/like',[CommentsLikesController, 'unLike'])

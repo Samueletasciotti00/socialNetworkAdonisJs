@@ -22,7 +22,7 @@
 {
   "user_id": 1,
   "post_id": 1,
-  "content": "ciaone ciao"
+  "content": "Primo commento"
 }
 
 // Commento del commento
@@ -30,7 +30,7 @@
 {
   "user_id": 1,
   "post_id": 1,
-  "content": "ciaone ciao",
+  "content": "Comment comment 1",
   "parent_id": 1
 }
 

@@ -15,6 +15,7 @@ export default class LikesController {
 
         return response.json({existingLike, message: 'Post Liked!'})
     } catch (error) {
+        console.error(error)
         return response.json({error: 'Error to put the like'})
     }
  }

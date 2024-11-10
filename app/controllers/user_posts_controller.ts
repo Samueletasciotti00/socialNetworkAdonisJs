@@ -13,10 +13,10 @@ export default class UserPostsController {
 
   async store({ request, response }: HttpContext) {
     try {
-      const data = request.only(['title', 'content','userId'])
-      if(data.userId > 0) {
+      const data = request.only(['title', 'content','user_id'])
+      if(data.user_id > 0) {
         const post = await Post.create(data)
-        return response.status(201).json({data: post})
+        return response.status(201).json({data: post, message: 'Post created successfully'})
       }
       
     } catch (error) {

@@ -8,14 +8,17 @@ import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Avatar from './avatar.js'
 import Post from './post.js'
 import Like from './like.js'
+import Comment from './comment.js'
+import CommentLike from './comment_like.js'
 
-const AuthFinder = withAuthFinder(() => hash.use('scrypt'), { // Hash methods for crypting password
+const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
+  // Hash methods for crypting password
   uids: ['email'],
   passwordColumnName: 'password',
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
-  @hasOne(()=> Avatar,)
+  @hasOne(() => Avatar)
   declare avatar: HasOne<typeof Avatar>
 
   @hasMany(() => Post)
@@ -23,6 +26,12 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(() => Like)
   declare likes: HasMany<typeof Like>
+
+  @hasMany(() => Comment)
+  declare comments: HasMany<typeof Comment>
+
+  @hasMany(() => CommentLike)
+  declare commentsLikes: HasMany<typeof CommentLike>
 
   @column({ isPrimary: true })
   declare id: number
