@@ -14,9 +14,13 @@ export default class UserAvatarsController {
     }
     
     const avatar = await Avatar.findOrFail(params.id)
-    avatar.imgAvatar = avt.headers['filename']
+    avatar.imgAvatar = avt.headers['content-disposition']
     await avatar.save()
-    await avatar.imgAvatar.move(app.makePath('public/upload'))
+
+    // Da fixare sia il percorso dell'immagine caricato che lo spostamento
+    // del file in storage
+
+    // await avatar.imgAvatar.move(app.makePath('public/upload'))
 
     
   }
