@@ -2,3 +2,18 @@
 
 - Sitemare dentro il file (routes.ts) il percorso url dei vari controller in mariera pulita ed ottimizzata
 - Sitemare il metodo di caricamento delle immagini all'interno del controller (UserAvatarsController)
+
+
+// Controller del UserAvatarsController
+
+ try {
+      const avatar = await Avatar.findOrFail(params.id)
+      const imgAv = request.file('avatar')
+      if(!avatar){
+        return 'Inserisci un file'
+      }
+      await avatar.move(app.makePath('storage/uploads'))
+      return response.status(201).json({ data: avatar, message: 'Img updated successfully' })
+    } catch (error) {
+      return response.status(400).json({ message: 'img error' })
+    }

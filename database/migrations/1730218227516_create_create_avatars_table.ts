@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
 
       table.enum('theme',['light', 'dark']).defaultTo('light').notNullable()
-      table.string('img_avatar').defaultTo('img')
+      table.string('img_avatar')
       table.string('cover_img').defaultTo('img_cover').nullable()
       table.enum('profile_visibility', ['public', 'private', 'friends']).defaultTo('public')
       

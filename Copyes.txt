@@ -48,3 +48,9 @@
   "title": "Primo Post",
   "content": "Il primo post"
 }
+
+// File update
+
+{
+ "imgAvatar": "public/upload/avatars/Screenshot 2024-11-06 alle 11.06.33.png"
+}

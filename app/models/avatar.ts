@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { MultipartFile } from '@adonisjs/core/bodyparser'
 
 export default class Avatar extends BaseModel {
   @column({ isPrimary: true })
@@ -12,7 +13,7 @@ export default class Avatar extends BaseModel {
   declare theme: 'light' | 'dark'
 
   @column()
-  declare imgAvatar: File
+  declare imgAvatar: MultipartFile 
 
   @column()
   declare coverImg: string
